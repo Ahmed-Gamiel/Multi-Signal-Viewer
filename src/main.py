@@ -138,12 +138,12 @@ class ApplicationWindow(QtWidgets.QMainWindow):
             if self.ui.stop_play_Button.text() == "stop":
                 Graph.signalTimer.stop()
                 self.ui.stop_play_Button.setText("play")
-                self.ui.stop_play_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("play.png")))
+                self.ui.stop_play_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/play.png")))
 
             else:
                 Graph.signalTimer.start()
                 self.ui.stop_play_Button.setText("stop")
-                self.ui.stop_play_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("pause.png")))
+                self.ui.stop_play_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/pause.png")))
 
         except:
             pass
@@ -165,14 +165,14 @@ class ApplicationWindow(QtWidgets.QMainWindow):
                     self.signals[ChannelIndex].plot()
                     self.signals[ChannelIndex].Ishiden = False
                     self.ui.show_hide_Button.setText("Hide")
-                    self.ui.show_hide_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("hideicon.jpg")))
+                    self.ui.show_hide_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/hideicon.jpg")))
 
             else:
                 self.signals[ChannelIndex].resetcolor("black")
                 self.signals[ChannelIndex].plot()
                 self.signals[ChannelIndex].resetcolor(self.signals[ChannelIndex].tem_Color)
                 self.ui.show_hide_Button.setText("Show")
-                self.ui.show_hide_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("showicon.png")))
+                self.ui.show_hide_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/dshowicon.png")))
 
 
 
