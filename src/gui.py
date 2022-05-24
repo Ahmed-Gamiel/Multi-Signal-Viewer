@@ -1,24 +1,12 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from pyqtgraph import PlotWidget
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMessageBox, QScrollArea
-import pandas as pd
-from New_classes import Graph,Spectrogram
-import numpy as np
-from scipy.fft import fftshift
-from scipy import signal
-import matplotlib.pyplot as plt
-from scipy.io import loadmat
-#from pdf import PDF
-import os
-from pyqtgraph import PlotWidget, plot
-import pyqtgraph as pg
-#import pyqtgraph.exporters
+from classes import Graph, Spectrogram
+
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1119, 703)
-        MainWindow.setWindowIcon(QtGui.QIcon("MainIcon.png"))
+        MainWindow.setWindowIcon(QtGui.QIcon("../icons/MainIcon.png"))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -65,14 +53,14 @@ class Ui_MainWindow(object):
         self.OK_Button = QtWidgets.QPushButton(self.widget)
         self.OK_Button.setObjectName("OK_Button")
         self.horizontalLayout_2.addWidget(self.OK_Button)
-        self.OK_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("setlabel.png")))
+        self.OK_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/setlabel.png")))
 
         spacerItem3 = QtWidgets.QSpacerItem(48, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem3)
         self.open_Button = QtWidgets.QPushButton(self.widget)
         self.open_Button.setObjectName("open_Button")
         self.horizontalLayout_2.addWidget(self.open_Button)
-        self.open_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("openicon.png")))
+        self.open_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/openicon.png")))
 
         self.chan_color_comboBox = QtWidgets.QComboBox(self.widget)
         self.chan_color_comboBox.setMouseTracking(False)
@@ -105,13 +93,10 @@ class Ui_MainWindow(object):
         self.chanels_verticalScrollBar.setOrientation(QtCore.Qt.Vertical)
         self.chanels_verticalScrollBar.setObjectName("chanels_verticalScrollBar")
         self.chanels_verticalScrollBar.setValue(50)
-
         self.gridLayout.addWidget(self.chanels_verticalScrollBar, 0, 0, 1, 1)
         Graph.createPlotWidget()
         self.channels_graphicsView = Graph.getLastChannel()
         self.channels_graphicsView.setEnabled(True)
-        #self.channels_graphicsView.setDragMode(QtWidgets.QGraphicsView.ScrollHandDrag)
-        #self.channels_graphicsView.setRenderHint(QtWidgets.QStylePainter.Antialiasing, True)
         self.gridLayout.addWidget(self.channels_graphicsView, 0, 1, 1, 1)
         self.chanels_horizontalScrollBar = QtWidgets.QScrollBar(self.widget1)
         self.chanels_horizontalScrollBar.setOrientation(QtCore.Qt.Horizontal)
@@ -132,9 +117,9 @@ class Ui_MainWindow(object):
         self.stop_play_Button.setSizePolicy(sizePolicy)
         self.stop_play_Button.setObjectName("chanels_stop_Button")
         self.verticalLayout.addWidget(self.stop_play_Button)
-        self.stop_play_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("pause.png")))
+        self.stop_play_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/pause.png")))
         self.chanel_zoomIn_Button = QtWidgets.QPushButton(self.widget2)
-        self.chanel_zoomIn_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("zoom-in.png")))
+        self.chanel_zoomIn_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/zoom-in.png")))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -149,7 +134,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.chanels_zoomOut_Button.sizePolicy().hasHeightForWidth())
         self.chanels_zoomOut_Button.setSizePolicy(sizePolicy)
         self.chanels_zoomOut_Button.setObjectName("chanels_zoomOut_Button")
-        self.chanels_zoomOut_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("zoom-out.png")))
+        self.chanels_zoomOut_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/zoom-out.png")))
 
         self.verticalLayout.addWidget(self.chanels_zoomOut_Button)
         self.chanels_resetView_Button = QtWidgets.QPushButton(self.widget2)
@@ -159,7 +144,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.chanels_resetView_Button.sizePolicy().hasHeightForWidth())
         self.chanels_resetView_Button.setSizePolicy(sizePolicy)
         self.chanels_resetView_Button.setObjectName("chanels_resetView_Button")
-        self.chanels_resetView_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("resetview.jpeg")))
+        self.chanels_resetView_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/resetview.jpeg")))
 
         self.verticalLayout.addWidget(self.chanels_resetView_Button)
         self.chanels_clear_Button = QtWidgets.QPushButton(self.widget2)
@@ -170,7 +155,7 @@ class Ui_MainWindow(object):
         self.chanels_clear_Button.setSizePolicy(sizePolicy)
         self.chanels_clear_Button.setObjectName("chanels_clear_Button")
         self.verticalLayout.addWidget(self.chanels_clear_Button)
-        self.chanels_clear_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("delete.png")))
+        self.chanels_clear_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/delete.png")))
 
         self.show_hide_Button = QtWidgets.QPushButton(self.widget2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
@@ -180,7 +165,7 @@ class Ui_MainWindow(object):
         self.show_hide_Button.setSizePolicy(sizePolicy)
         self.show_hide_Button.setObjectName("chanels_hide_Button")
         self.verticalLayout.addWidget(self.show_hide_Button)
-        self.show_hide_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("hideicon.jpg")))
+        self.show_hide_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/hideicon.jpg")))
 
         self.horizontalLayout.addLayout(self.verticalLayout)
         self.chan_speed_verticalSlider = QtWidgets.QSlider(self.widget2)
@@ -220,16 +205,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.widget4)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.spectro_color_comboBox = QtWidgets.QComboBox(self.widget4)
-        self.spectro_color_comboBox.setMouseTracking(False)
-        self.spectro_color_comboBox.setEditable(False)
-        self.spectro_color_comboBox.setObjectName("spectro_color_comboBox")
-        self.spectro_color_comboBox.addItem("")
-        self.spectro_color_comboBox.addItem("")
-        self.spectro_color_comboBox.addItem("")
-        self.spectro_color_comboBox.addItem("")
-        self.spectro_color_comboBox.addItem("")
-        self.verticalLayout_3.addWidget(self.spectro_color_comboBox)
         self.specto_show_comboBox = QtWidgets.QComboBox(self.widget4)
         self.specto_show_comboBox.setEditable(False)
         self.specto_show_comboBox.addItem("")
@@ -240,7 +215,7 @@ class Ui_MainWindow(object):
         self.specto_clear_Button = QtWidgets.QPushButton(self.widget4)
         self.specto_clear_Button.setObjectName("specto_clear_Button")
         self.verticalLayout_3.addWidget(self.specto_clear_Button)
-        self.specto_clear_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("delete.png")))
+        self.specto_clear_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("../icons/delete.png")))
         self.verticalLayout_4.addWidget(self.splitter_5)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -248,8 +223,6 @@ class Ui_MainWindow(object):
         self.menubar.setObjectName("menubar")
         self.menufile = QtWidgets.QMenu(self.menubar)
         self.menufile.setObjectName("menufile")
-        self.menuAbout = QtWidgets.QMenu(self.menubar)
-        self.menuAbout.setObjectName("menuAbout")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -259,11 +232,7 @@ class Ui_MainWindow(object):
         self.actionExport_as_PDF = QtWidgets.QAction(MainWindow)
         self.actionExport_as_PDF.setObjectName("actionExport_as_PDF")
         self.menufile.addAction(self.actionExport_as_PDF)
-        self.actionExit = QtWidgets.QAction(MainWindow)
-        self.actionExit.setObjectName("actionExit")
-        self.menufile.addAction(self.actionExit)
         self.menubar.addAction(self.menufile.menuAction())
-        self.menubar.addAction(self.menuAbout.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -287,24 +256,16 @@ class Ui_MainWindow(object):
         self.chanels_clear_Button.setText(_translate("MainWindow", "clear"))
         self.show_hide_Button.setText(_translate("MainWindow", "Hide"))
         self.spectrogram_label.setText(_translate("MainWindow", "Spectrogram"))
-        self.spectro_color_comboBox.setCurrentText(_translate("MainWindow", "red"))
-        self.spectro_color_comboBox.setItemText(0, _translate("MainWindow", "red"))
-        self.spectro_color_comboBox.setItemText(1, _translate("MainWindow", "green"))
-        self.spectro_color_comboBox.setItemText(2, _translate("MainWindow", "yellow"))
-        self.spectro_color_comboBox.setItemText(3, _translate("MainWindow", "blue"))
-        self.spectro_color_comboBox.setItemText(4, _translate("MainWindow", "white"))
         self.specto_show_comboBox.setCurrentText(_translate("MainWindow", "Show "))
         self.specto_clear_Button.setText(_translate("MainWindow", "Clear"))
         self.menufile.setTitle(_translate("MainWindow", "file"))
-        self.menuAbout.setTitle(_translate("MainWindow", "About"))
         self.actionopen.setText(_translate("MainWindow", "open"))
         self.actionExport_as_PDF.setText(_translate("MainWindow", "Export as PDF"))
-        self.actionExit.setText(_translate("MainWindow", "Exit"))
-
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()

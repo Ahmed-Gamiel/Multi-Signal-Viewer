@@ -11,20 +11,13 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 import sys
-from New_GUI import Ui_MainWindow
-
-import pyqtgraph as pg
+from gui import Ui_MainWindow
 from fpdf import FPDF
 import numpy as np
 import os
 import pathlib
 from matplotlib.backends.backend_pdf import PdfPages
-from New_classes import Graph, SignalPlotting, Spectrogram
-
-
-# class definition for application window components like the ui
-
-
+from classes import Graph, SignalPlotting, Spectrogram
 class ApplicationWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(ApplicationWindow, self).__init__()
@@ -101,12 +94,8 @@ class ApplicationWindow(QtWidgets.QMainWindow):
                 self.ui.specto_show_comboBox.setItemText(self.SignalIndex, "{} signal".format(Signal_Name))
                 self.data.append(self.signals[self.SignalIndex].getStatistic_info())
                 self.SignalIndex += 1
-
-
-
         except:
             pass
-
     def export_to_pdf(self):
         pdf = FPDF()
         pdf.add_page()
@@ -155,7 +144,6 @@ class ApplicationWindow(QtWidgets.QMainWindow):
                 Graph.signalTimer.start()
                 self.ui.stop_play_Button.setText("stop")
                 self.ui.stop_play_Button.setIcon(QtGui.QIcon(QtGui.QPixmap("pause.png")))
-
 
         except:
             pass
@@ -314,7 +302,6 @@ class ApplicationWindow(QtWidgets.QMainWindow):
             self.report.close()
         except:
             pass
-
 
 # function for launching a QApplication and running the ui and main window
 def window():
